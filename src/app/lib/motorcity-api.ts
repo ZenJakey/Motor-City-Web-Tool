@@ -5,7 +5,6 @@ import axios from 'axios';
 
 export async function fetchJsonData(url: string) {
     try {
-        console.log(`GET ${url}`)
         return await axios.get(url);
     } catch (error) {
         console.error('Error fetching JSON data:', error);
@@ -14,7 +13,6 @@ export async function fetchJsonData(url: string) {
 
 export async function postRequest(url: string){
     try {
-        console.log(`POST ${url}`)
         const response = await axios.post(url);
         return response.data;
     } catch (error) {

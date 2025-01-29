@@ -2,18 +2,10 @@
 
 import {Player} from "@/app/lib/definitions";
 import {banPlayer, kickPlayer, unbanPlayer} from "@/app/lib/motorcity-api";
-import {useSearchParams} from "next/navigation";
-
-export function GetParams() {
-    const searchParams = useSearchParams();
-    const params = new URLSearchParams(searchParams);
-    const serverIp = params.get("serverip");
-    const apiPassword = params.get("apiPassword");
-    return {serverIp, apiPassword}
-}
+import {useServerCredentials} from "@/app/context/server-credentials-context";
 
 export function KickButton({player}: { player: Player }) {
-    const {serverIp, apiPassword} = GetParams()
+    const { serverIp, apiPassword } = useServerCredentials();
     if (!serverIp || !apiPassword) {
         return
     }
@@ -34,7 +26,7 @@ export function KickButton({player}: { player: Player }) {
 }
 
 export function BanButton({player}: { player: Player }) {
-    const {serverIp, apiPassword} = GetParams()
+    const { serverIp, apiPassword } = useServerCredentials();
     if (!serverIp || !apiPassword) {
         return;
     }
@@ -54,7 +46,7 @@ export function BanButton({player}: { player: Player }) {
 }
 
 export function UnbanButton({player}: { player: Player }) {
-    const {serverIp, apiPassword} = GetParams()
+    const { serverIp, apiPassword } = useServerCredentials();
     if (!serverIp || !apiPassword) {
         return
     }

@@ -1,22 +1,19 @@
 'use client'
 import {useState} from "react";
 import {sendAnnouncement} from "@/app/lib/motorcity-api";
-import {useSearchParams} from "next/navigation";
+import {useServerCredentials} from "@/app/context/server-credentials-context";
 
 export default function AnnouncementForm() {
     const [announcement, setAnnouncement] = useState(""); // State to hold the input value
-    const searchParams = useSearchParams(); // Moved hook call inside the component body
+    const { serverIp, apiPassword } = useServerCredentials();
 
     const handleSend = async () => {
         if (!announcement) {
             alert("Please enter an announcement."); // Validate input
             return;
         }
-
         try {
-            const params = new URLSearchParams(searchParams.toString());
-            const serverIp = params.get("serverip");
-            const apiPassword = params.get("apiPassword");
+
             if (!serverIp || !apiPassword) {
                 return;
             }
