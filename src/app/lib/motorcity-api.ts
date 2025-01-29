@@ -61,7 +61,6 @@ export async function kickPlayer(address: string, apiPassword: string, player: P
 }
 
 export async function banPlayer(address: string, apiPassword: string, player: Player) {
-    console.log("Banning!!!fjklajsl")
     const url = `http://${address}/player/ban/?password=${apiPassword}&unique_id=${player.uid}`
     await postRequest(url)
 }

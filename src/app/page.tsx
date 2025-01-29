@@ -2,7 +2,7 @@ import {Metadata} from "next";
 import ServerCredentialsForm from "@/app/ui/forms/server-credentials-form";
 import AnnouncementForm from "@/app/ui/forms/announcement-form";
 import PlayerList from "@/app/ui/player-list";
-import BanList from "@/app/ui/forms/ban-list";
+import BanList from "@/app/ui/ban-list";
 
 export const metadata: Metadata = {};
 
