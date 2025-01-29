@@ -21,9 +21,13 @@ export async function postRequest(url: string){
     }
 }
 
+function getURL(address: string, apiPassword: string, endpoint: string, params: string[]) {
+    return `http://${address}${endpoint}?password=${apiPassword}&${params.join("&")}`
+}
+
 export async function getPlayerList(address: string, apiPassword: string): Promise<Player []> {
     if (!address || !apiPassword) {return []}
-    const url = `http://${address}/player/list/?password=${apiPassword}`
+    const url = getURL(address, apiPassword, "/player/list", [])
     const response = await fetchJsonData(url)
     if(!response) return []
 
@@ -35,7 +39,7 @@ export async function getPlayerList(address: string, apiPassword: string): Promi
 
 export async function getBanList(address: string, apiPassword: string): Promise<Player []> {
     if (!address || !apiPassword) {return []}
-    const url = `http://${address}/player/banlist/?password=${apiPassword}`
+    const url = getURL(address, apiPassword, "/player/banlist", [])
     const response = await fetchJsonData(url)
     if(!response) return []
 
@@ -47,28 +51,28 @@ export async function getBanList(address: string, apiPassword: string): Promise<
 
 export async function getPlayerCount(address: string, apiPassword: string): Promise<number> {
     if (!address || !apiPassword) {return 0}
-    const url = `http://${address}/player/count/?password=${apiPassword}`
+    const url = getURL(address, apiPassword, "/player/count", [])
     const response = await fetchJsonData(url)
     console.log(response?.data)
     return 0
 }
 
 export async function kickPlayer(address: string, apiPassword: string, player: Player) {
-    const url = `http://${address}/player/kick/?password=${apiPassword}&unique_id=${player.uid}`
+    const url = getURL(address, apiPassword, "/player/kick", [`unique_id=${player.uid}`])
     await postRequest(url)
 }
 
 export async function banPlayer(address: string, apiPassword: string, player: Player) {
-    const url = `http://${address}/player/ban/?password=${apiPassword}&unique_id=${player.uid}`
+    const url = getURL(address, apiPassword, "/player/ban", [`unique_id=${player.uid}`])
     await postRequest(url)
 }
 
 export async function unbanPlayer(address: string, apiPassword: string, player: Player) {
-    const url = `http://${address}/player/unban/?password=${apiPassword}&unique_id=${player.uid}`
+    const url = getURL(address, apiPassword, "/player/unban", [`unique_id=${player.uid}`])
     await postRequest(url)
 }
 
 export async function sendAnnouncement(address: string, apiPassword: string, message: string) {
-    const url = `http://${address}/chat/?password=${apiPassword}&message=${message}`
+    const url = getURL(address, apiPassword, "/chat", [`message=${message}`])
     await postRequest(url)
 }
