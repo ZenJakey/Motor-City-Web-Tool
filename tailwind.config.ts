@@ -11,6 +11,8 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        listColor1: "var(--listColor1)",
+        listColor2: "var(--listColor2)",
       },
     },
   },
